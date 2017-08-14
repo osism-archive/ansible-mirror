@@ -3,6 +3,12 @@ configure_aptly: yes
 configure_registry: yes
 
 ##########################
+# operator
+
+operator_user: "{{ ansible_user }}"
+operator_group: "{{ operator_user }}"
+
+##########################
 # packages
 
 required_packages_mirror:

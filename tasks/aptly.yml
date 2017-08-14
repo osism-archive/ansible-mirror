@@ -23,7 +23,7 @@
     path: "{{ item }}"
     state: directory
     owner: "{{ operator_user }}"
-    group: "{{ operator_user }}"
+    group: "{{ operator_group }}"
     mode: 0750
   become: true
   with_items:
@@ -37,7 +37,7 @@
     dest: "{{ item.dest }}"
     mode: 0640
     owner: "{{ operator_user }}"
-    group: "{{ operator_user }}"
+    group: "{{ operator_group }}"
   with_items:
     - src: aptly/aptly.conf.j2
       dest: "{{ aptly_configuration_directory }}/aptly.conf"
