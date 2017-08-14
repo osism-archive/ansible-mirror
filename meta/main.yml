@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Christian Berendt
+  description: Role to run Aptly and Docker registry service.
+  company: Betacloud Solutions GmbH
+  license: Apache License 2.0
+  min_ansible_version: 2.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+  galaxy_tags:
+  - system
+  dependencies:
+  - name: osism.docker
+    src: git+https://github.com/osism/ansible-docker.git

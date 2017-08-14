@@ -1,0 +1,19 @@
+# This file is subject to the terms and conditions defined in file 'LICENSE',
+# which is part of this repository.
+---
+- name: Install required packages
+  package:
+    name: "{{ item }}"
+    state: present
+  become: true
+  with_items: "{{ required_packages_mirror }}"
+
+- name: Include aptly tasks
+  include: aptly.yml
+  tags: aptly
+  when: configure_aptly|bool
+
+- name: Include registry tasks
+  include: registry.yml
+  tags: registry
+  when: configure_aptly|bool

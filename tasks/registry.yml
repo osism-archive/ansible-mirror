@@ -1,0 +1,40 @@
+# This file is subject to the terms and conditions defined in file 'LICENSE',
+# which is part of this repository.
+---
+- name: Create required directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ operator_user }}"
+    group: "{{ operator_user }}"
+    mode: 0750
+  become: true
+  with_items:
+    - "{{ registry_configuration_directory }}"
+    - "{{ registry_storage_directory }}"
+
+- name: Copy configuration files
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: 0640
+    owner: "{{ operator_user }}"
+    group: "{{ operator_user }}"
+  with_items:
+    - src: registry/registry.yml.j2
+      dest: "{{ registry_configuration_directory }}/config.yml"
+
+- name: Run service
+  docker_service:
+    project_name: registry
+    definition:
+      version: '2'
+      services:
+        registry:
+          restart: unless-stopped
+          image: "{{ registry_docker_image }}"
+          volumes:
+            - "{{ registry_configuration_directory }}:/etc/docker/registry"
+            - "{{ registry_storage_directory }}:/var/lib/registry"
+          ports:
+            - "{{ registry_host }}:{{ registry_port }}:5000"
