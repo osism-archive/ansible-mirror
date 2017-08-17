@@ -39,6 +39,8 @@
   with_items:
     - src: aptly/aptly.conf.j2
       dest: "{{ aptly_configuration_directory }}/aptly.conf"
+    - src: aptly/nginx.conf.j2
+      dest: "{{ aptly_configuration_directory }}/nginx.conf"
 
 - name: Run service
   docker_service:
@@ -54,24 +56,17 @@
             EMAIL_ADDRESS: "{{ aptly_configuration['email_address'] }}"
             GPG_PASSWORD: "{{ aptly_configuration['gpg_password'] }}"
           volumes:
-            - "{{ aptly_configuration_directory }}/aptly.conf:/etc/aptly.conf"
+            - "{{ aptly_configuration_directory }}/aptly.conf:/etc/aptly.conf:ro"
             - "database:/opt/aptly/db"
             - "storage:/opt/aptly"
         nginx:
           restart: unless-stopped
           image: "{{ aptly_nginx_docker_image }}"
           volumes:
-            - "{{ aptly_storage_directory }}/public:/usr/share/nginx/html"
+            - "{{ aptly_configuration_directory }}/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
+            - "storage:/opt/aptly:ro"
           ports:
             - "{{ aptly_nginx_host }}:{{ aptly_nginx_port }}:80"
       volumes:
         database:
         storage:
-
-# NOTE: This is an ugly workaround to not provide our own nginx configuration/image
-
-- name: Enable autoindex in nginx contaiener
-  command: docker exec -t aptly_nginx_1 sed -i 'N; s/root   \/usr\/share\/nginx\/html;\n        index  index.html index.htm;/root   \/usr\/share\/nginx\/html;\n        autoindex on;/' /etc/nginx/conf.d/default.conf
-
-- name: Restart nginx container
-  command: docker restart aptly_nginx_1
