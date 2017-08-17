@@ -24,8 +24,6 @@ docker_registry: index.docker.io
 # aptly
 
 aptly_configuration_directory: /opt/aptly/configuration
-aptly_database_directory: /opt/aptly/database
-aptly_storage_directory: /opt/aptly/storage
 
 aptly_configuration:
   full_name: Betacloud Solutions GmbH
@@ -47,7 +45,6 @@ aptly_nginx_docker_image: "{{ docker_registry }}/nginx:{{ aptly_nginx_version }}
 registry_host: "{{ ansible_default_ipv4.address }}"
 registry_port: 5000
 
-registry_storage_directory: /opt/registry/storage
 registry_configuration_directory: /opt/registry/configuration
 
 registry_configuration:

@@ -28,8 +28,6 @@
   become: true
   with_items:
     - "{{ aptly_configuration_directory }}"
-    - "{{ aptly_database_directory }}"
-    - "{{ aptly_storage_directory }}"
 
 - name: Copy configuration files
   template:
@@ -57,8 +55,8 @@
             GPG_PASSWORD: "{{ aptly_configuration['gpg_password'] }}"
           volumes:
             - "{{ aptly_configuration_directory }}/aptly.conf:/etc/aptly.conf"
-            - "{{ aptly_database_directory }}:/opt/aptly/db"
-            - "{{ aptly_storage_directory }}:/opt/aptly"
+            - "database:/opt/aptly/db"
+            - "storage:/opt/aptly"
         nginx:
           restart: unless-stopped
           image: "{{ aptly_nginx_docker_image }}"
@@ -66,6 +64,9 @@
             - "{{ aptly_storage_directory }}/public:/usr/share/nginx/html"
           ports:
             - "{{ aptly_nginx_host }}:{{ aptly_nginx_port }}:80"
+      volumes:
+        database:
+        storage:
 
 # NOTE: This is an ugly workaround to not provide our own nginx configuration/image
 
