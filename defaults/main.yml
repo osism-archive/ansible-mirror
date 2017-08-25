@@ -36,8 +36,8 @@ aptly_nginx_port: 8080
 aptly_version: 1.1.1
 aptly_docker_image: "{{ docker_registry }}/osism/aptly:{{ aptly_version }}"
 
-aptly_nginx_version: 1.13
-aptly_nginx_docker_image: "{{ docker_registry }}/nginx:{{ aptly_nginx_version }}"
+nginx_version: 1.13
+nginx_docker_image: "{{ docker_registry }}/nginx:{{ nginx_version }}"
 
 ##########################
 # registry
