@@ -33,11 +33,11 @@ aptly_configuration:
 aptly_nginx_host: "{{ ansible_default_ipv4.address }}"
 aptly_nginx_port: 8080
 
-aptly_version: 1.1.1
-aptly_docker_image: "{{ docker_registry }}/osism/aptly:{{ aptly_version }}"
+aptly_tag: 1.1.1
+aptly_image: "{{ docker_registry }}/osism/aptly:{{ aptly_tag }}"
 
-nginx_version: 1.13
-nginx_docker_image: "{{ docker_registry }}/nginx:{{ nginx_version }}"
+nginx_tag: 1.13
+nginx_image: "{{ docker_registry }}/nginx:{{ nginx_tag }}"
 
 ##########################
 # registry
@@ -50,5 +50,5 @@ registry_configuration_directory: /opt/registry/configuration
 registry_configuration:
   secret: supersecretsecret
 
-registry_version: 2.6.2
-registry_docker_image: "{{ docker_registry }}/registry:{{ registry_version }}"
+registry_tag: 2.6.2
+registry_image: "{{ docker_registry }}/registry:{{ registry_tag }}"

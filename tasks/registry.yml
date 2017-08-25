@@ -31,7 +31,7 @@
       services:
         registry:
           restart: unless-stopped
-          image: "{{ registry_docker_image }}"
+          image: "{{ registry_image }}"
           volumes:
             - "{{ registry_configuration_directory }}:/etc/docker/registry"
             - "storage:/var/lib/registry"

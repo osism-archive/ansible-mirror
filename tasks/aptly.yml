@@ -50,7 +50,7 @@
       services:
         aptly:
           restart: unless-stopped
-          image: "{{ aptly_docker_image }}"
+          image: "{{ aptly_image }}"
           environment:
             FULL_NAME: "{{ aptly_configuration['full_name'] }}"
             EMAIL_ADDRESS: "{{ aptly_configuration['email_address'] }}"
@@ -61,7 +61,7 @@
             - "storage:/opt/aptly"
         nginx:
           restart: unless-stopped
-          image: "{{ nginx_docker_image }}"
+          image: "{{ nginx_image }}"
           volumes:
             - "{{ aptly_configuration_directory }}/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
             - "storage:/opt/aptly:ro"
