@@ -39,5 +39,12 @@
             - "storage:/var/lib/registry"
           ports:
             - "{{ registry_host }}:{{ registry_port }}:5000"
+          networks:
+            mirror:
+              aliases:
+                - registry
       volumes:
         storage:
+      networks:
+        mirror:
+          external: true

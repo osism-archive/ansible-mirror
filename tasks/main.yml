@@ -8,6 +8,10 @@
   become: true
   with_items: "{{ required_packages_mirror }}"
 
+- name: Create overlay network
+  docker_network:
+    name: mirror
+
 - name: Include aptly tasks
   include: aptly.yml
   tags: aptly

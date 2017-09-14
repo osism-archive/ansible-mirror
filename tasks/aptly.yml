@@ -55,7 +55,6 @@
             FULL_NAME: "{{ aptly_configuration['full_name'] }}"
             EMAIL_ADDRESS: "{{ aptly_configuration['email_address'] }}"
             GPG_PASSWORD: "{{ aptly_configuration['gpg_password'] }}"
-            VIRTUAL_HOST: "{{ aptly_configuration['virtual_host']|default('aptly') }}"
           volumes:
             - "{{ aptly_configuration_directory }}/aptly.conf:/etc/aptly.conf:ro"
             - "database:/opt/aptly/db"
@@ -68,6 +67,15 @@
             - "storage:/opt/aptly:ro"
           ports:
             - "{{ aptly_nginx_host }}:{{ aptly_nginx_port }}:80"
+          environment:
+            VIRTUAL_HOST: "{{ aptly_configuration['virtual_host']|default('aptly') }}"
+          networks:
+            mirror:
+              aliases:
+                - aptly
       volumes:
         database:
         storage:
+      networks:
+        mirror:
+          external: true
