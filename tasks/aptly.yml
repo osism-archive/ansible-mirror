@@ -55,6 +55,7 @@
             FULL_NAME: "{{ aptly_configuration['full_name'] }}"
             EMAIL_ADDRESS: "{{ aptly_configuration['email_address'] }}"
             GPG_PASSWORD: "{{ aptly_configuration['gpg_password'] }}"
+            VIRTUAL_HOST: "{{ aptly_configuration['virtual_host']|default('aptly') }}"
           volumes:
             - "{{ aptly_configuration_directory }}/aptly.conf:/etc/aptly.conf:ro"
             - "database:/opt/aptly/db"

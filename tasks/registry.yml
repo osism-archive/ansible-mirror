@@ -32,6 +32,8 @@
         registry:
           restart: unless-stopped
           image: "{{ registry_image }}"
+          environment:
+            VIRTUAL_HOST: "{{ registry_configuration['virtual_host']|default('registry') }}"
           volumes:
             - "{{ registry_configuration_directory }}:/etc/docker/registry"
             - "storage:/var/lib/registry"
