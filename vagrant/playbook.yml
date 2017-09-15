@@ -1,12 +1,10 @@
-# This file is subject to the terms and conditions defined in file 'LICENSE',
-# which is part of this repository.
 ---
-- name: Install python version 2 on ubuntu
+- name: Install python version 2
   hosts: all
   gather_facts: no
 
   tasks:
-  - name: Install python version 2 on ubuntu
+  - name: Install python version 2
     raw: test -e /usr/bin/python || (test -e /usr/bin/apt && (apt -y update && apt install -y python-minimal))
     register: result
     changed_when: result.rc != 0
@@ -15,6 +13,13 @@
 - name: Playbook for prearations
   hosts: all
 
+  vars:
+    operator_user: ubuntu
+    operator_group: ubuntu
+    operator_user_id: 1000
+    operator_group_id: 1000
+    docker_user: ubuntu
+
   roles:
   - role: osism.operator
   - role: osism.docker
@@ -22,6 +27,10 @@
 - name: Playbook for role testing
   hosts: all
   connection: paramiko
+
+  vars:
+    operator_user: ubuntu
+    operator_group: ubuntu
 
   roles:
   - role: ../../ansible-mirror
