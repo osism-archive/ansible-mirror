@@ -1,7 +1,5 @@
-# This file is subject to the terms and conditions defined in file 'LICENSE',
-# which is part of this repository.
 ---
-- name: Install required packages
+- name: aptly - install required packages
   package:
     name: "{{ item }}"
     state: present
@@ -9,7 +7,7 @@
   with_items:
     - haveged
 
-- name: Start/enable required services
+- name: aptly - start/enable required services
   service:
     name: "{{ item }}"
     state: started
@@ -18,7 +16,7 @@
   with_items:
     - haveged
 
-- name: Create required directories
+- name: aptly - create required directories
   file:
     path: "{{ item }}"
     state: directory
@@ -29,7 +27,7 @@
   with_items:
     - "{{ aptly_configuration_directory }}"
 
-- name: Copy configuration files
+- name: aptly - copy configuration files
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -42,7 +40,7 @@
     - src: aptly/nginx.conf.j2
       dest: "{{ aptly_configuration_directory }}/nginx.conf"
 
-- name: Run service
+- name: aptly - run service
   docker_service:
     project_name: aptly
     definition:

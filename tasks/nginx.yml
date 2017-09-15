@@ -1,0 +1,47 @@
+---
+- name: nginx - create required directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+    mode: 0755
+  become: true
+  with_items:
+    - "{{ nginx_configuration_directory }}"
+    - "{{ nginx_storage_directory }}"
+
+- name: nginx - copy configuration files
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: 0640
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+  with_items:
+    - src: nginx/nginx.conf.j2
+      dest: "{{ nginx_configuration_directory }}/nginx.conf"
+
+- name: nginx - run service
+  docker_service:
+    project_name: nginx
+    definition:
+      version: '2'
+      services:
+        nginx:
+          restart: unless-stopped
+          image: "{{ nginx_image }}"
+          volumes:
+            - "{{ nginx_configuration_directory }}/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
+            - "{{ nginx_storage_directory }}:/opt/nginx:ro"
+          ports:
+            - "{{ nginx_host }}:{{ nginx_port }}:80"
+          environment:
+            VIRTUAL_HOST: "{{ nginx_configuration['virtual_host']|default('nginx') }}"
+          networks:
+            mirror:
+              aliases:
+                - nginx
+      networks:
+        mirror:
+          external: true
