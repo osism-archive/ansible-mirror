@@ -10,17 +10,17 @@
   docker_network:
     name: mirror
 
-- name: Include aptly tasks
+- name: aptly - include tasks
   include: aptly.yml
   tags: aptly
   when: configure_aptly|bool
 
-- name: Include registry tasks
+- name: registry - include tasks
   include: registry.yml
   tags: registry
   when: configure_registry|bool
 
-- name: Include nginx tasks
+- name: nginx - include tasks
   include: nginx.yml
   tags: nginx
   when: configure_nginx|bool
