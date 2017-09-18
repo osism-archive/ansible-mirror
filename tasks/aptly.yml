@@ -57,6 +57,7 @@
             - "{{ aptly_configuration_directory }}/aptly.conf:/etc/aptly.conf:ro"
             - "database:/opt/aptly/db"
             - "storage:/opt/aptly"
+            - "/etc/hosts:/etc/hosts:ro"
         nginx:
           restart: unless-stopped
           image: "{{ nginx_image }}"
