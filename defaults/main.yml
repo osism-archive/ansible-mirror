@@ -28,7 +28,6 @@ nginx_tag: 1.13
 nginx_image: "{{ docker_registry }}/nginx:{{ nginx_tag }}"
 
 nginx_configuration_directory: /opt/nginx/configuration
-nginx_storage_directory: /opt/nginx/storage
 
 nginx_host: "{{ ansible_default_ipv4.address }}"
 nginx_port: 8081

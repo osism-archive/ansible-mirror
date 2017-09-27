@@ -9,7 +9,6 @@
   become: true
   with_items:
     - "{{ nginx_configuration_directory }}"
-    - "{{ nginx_storage_directory }}"
 
 - name: nginx - copy configuration files
   template:
@@ -33,7 +32,7 @@
           image: "{{ nginx_image }}"
           volumes:
             - "{{ nginx_configuration_directory }}/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
-            - "{{ nginx_storage_directory }}:/opt/nginx:ro"
+            - "storage:/opt/nginx:ro"
           ports:
             - "{{ nginx_host }}:{{ nginx_port }}:80"
           environment:
@@ -42,6 +41,8 @@
             mirror:
               aliases:
                 - nginx
+      volumes:
+        storage:
       networks:
         mirror:
           external: true
