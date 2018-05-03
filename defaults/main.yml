@@ -13,7 +13,6 @@ operator_group: "{{ operator_user }}"
 # packages
 
 required_packages_mirror:
-  - docker-compose
   - python-docker
 
 ##########################

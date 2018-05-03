@@ -1,10 +1,10 @@
 ---
 galaxy_info:
   author: Christian Berendt
-  description: Role to run Aptly and Docker registry service.
+  description: Role osism.mirror
   company: Betacloud Solutions GmbH
   license: Apache License 2.0
-  min_ansible_version: 2.2
+  min_ansible_version: 2.3
   platforms:
     - name: Ubuntu
       versions:
