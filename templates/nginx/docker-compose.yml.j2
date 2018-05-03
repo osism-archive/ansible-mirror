@@ -1,0 +1,22 @@
+---
+version: '2'
+services:
+  nginx:
+    restart: unless-stopped
+    image: "{{ nginx_image }}"
+    volumes:
+      - "{{ nginx_configuration_directory }}/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
+      - "storage:/opt/nginx:ro"
+    ports:
+      - "{{ nginx_host }}:{{ nginx_port }}:80"
+    environment:
+      VIRTUAL_HOST: "{{ nginx_configuration['virtual_host']|default('nginx') }}"
+    networks:
+      mirror:
+        aliases:
+          - nginx
+volumes:
+  storage:
+networks:
+  mirror:
+    external: true

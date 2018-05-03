@@ -1,0 +1,35 @@
+---
+version: '2'
+services:
+  aptly:
+    restart: unless-stopped
+    image: "{{ aptly_image }}"
+    environment:
+      FULL_NAME: "{{ aptly_configuration['full_name'] }}"
+      EMAIL_ADDRESS: "{{ aptly_configuration['email_address'] }}"
+      GPG_PASSWORD: "{{ aptly_configuration['gpg_password'] }}"
+    volumes:
+      - "{{ aptly_configuration_directory }}/aptly.conf:/etc/aptly.conf:ro"
+      - "database:/opt/aptly/db"
+      - "storage:/opt/aptly"
+      - "/etc/hosts:/etc/hosts:ro"
+  nginx:
+    restart: unless-stopped
+    image: "{{ nginx_image }}"
+    volumes:
+      - "{{ aptly_configuration_directory }}/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
+      - "storage:/opt/aptly:ro"
+    ports:
+      - "{{ aptly_nginx_host }}:{{ aptly_nginx_port }}:80"
+    environment:
+      VIRTUAL_HOST: "{{ aptly_configuration['virtual_host']|default('aptly') }}"
+    networks:
+      mirror:
+        aliases:
+          - aptly
+volumes:
+  database:
+  storage:
+networks:
+  mirror:
+    external: true

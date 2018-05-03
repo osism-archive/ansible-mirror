@@ -1,0 +1,22 @@
+---
+version: '2'
+services:
+  registry:
+    restart: unless-stopped
+    image: "{{ registry_image }}"
+    environment:
+      VIRTUAL_HOST: "{{ registry_configuration['virtual_host']|default('registry') }}"
+    volumes:
+      - "{{ registry_configuration_directory }}:/etc/docker/registry"
+      - "storage:/var/lib/registry"
+    ports:
+      - "{{ registry_host }}:{{ registry_port }}:5000"
+    networks:
+      mirror:
+        aliases:
+          - registry
+volumes:
+  storage:
+networks:
+  mirror:
+    external: true

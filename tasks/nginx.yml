@@ -21,28 +21,20 @@
     - src: nginx/nginx.conf.j2
       dest: "{{ nginx_configuration_directory }}/nginx.conf"
 
+- name: nginx - copy docker-compose.yml file
+  template:
+    src: nginx/docker-compose.yml.j2
+    dest: "{{ nginx_docker_compose_directory }}/docker-compose.yml"
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+    mode: 0640
+
+- name: nginx - pull images
+  command: "docker-compose -f {{ nginx_docker_compose_directory }}/docker-compose.yml pull"
+  register: result
+  changed_when: ('Downloaded' in result.stdout)
+
 - name: nginx - run service
-  docker_service:
-    project_name: nginx
-    definition:
-      version: '2'
-      services:
-        nginx:
-          restart: unless-stopped
-          image: "{{ nginx_image }}"
-          volumes:
-            - "{{ nginx_configuration_directory }}/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
-            - "storage:/opt/nginx:ro"
-          ports:
-            - "{{ nginx_host }}:{{ nginx_port }}:80"
-          environment:
-            VIRTUAL_HOST: "{{ nginx_configuration['virtual_host']|default('nginx') }}"
-          networks:
-            mirror:
-              aliases:
-                - nginx
-      volumes:
-        storage:
-      networks:
-        mirror:
-          external: true
+  command: "docker-compose -f {{ nginx_docker_compose_directory }}/docker-compose.yml up -d --remove-orphans --no-build"
+  register: result
+  changed_when: ('Creating' in result.stdout or 'Recreating' in result.stdout)
