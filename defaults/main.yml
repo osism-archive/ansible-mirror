@@ -62,7 +62,7 @@ aptly_image: "{{ docker_registry }}/osism/aptly:{{ aptly_tag }}"
 registry_host: "{{ ansible_default_ipv4.address }}"
 registry_port: 5000
 
-registry_docker_compose_directory: /opt/aptly
+registry_docker_compose_directory: /opt/registry
 registry_configuration_directory: /opt/registry/configuration
 
 registry_configuration:
