@@ -1,11 +1,4 @@
 ---
-- name: Install required packages
-  package:
-    name: "{{ item }}"
-    state: present
-  become: true
-  with_items: "{{ required_packages_mirror }}"
-
 - name: Create overlay network
   docker_network:
     name: mirror
