@@ -5,6 +5,9 @@
 
   vars:
     operator_user: ubuntu
+    configure_aptly: yes
+    configure_nginx: yes
+    configure_registry: yes
 
   roles:
     - role: ansible-mirror

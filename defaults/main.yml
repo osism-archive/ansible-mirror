@@ -2,9 +2,9 @@
 ##########################
 # generic
 
-configure_aptly: yes
-configure_nginx: yes
-configure_registry: yes
+configure_aptly: no
+configure_nginx: no
+configure_registry: no
 
 ##########################
 # operator
