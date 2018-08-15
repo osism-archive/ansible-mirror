@@ -60,7 +60,7 @@ registry_docker_compose_directory: /opt/registry
 registry_configuration_directory: /opt/registry/configuration
 
 registry_configuration:
-  secret: supersecretsecret
+  secret: password
   virtual_host: registry
 
 registry_tag: 2.6.2
