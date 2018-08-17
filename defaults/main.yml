@@ -3,6 +3,7 @@
 # generic
 
 configure_aptly: no
+configure_devpi: no
 configure_nginx: no
 configure_registry: no
 
@@ -49,6 +50,18 @@ aptly_nginx_port: 8080
 
 aptly_tag: 1.3.0
 aptly_image: "{{ docker_registry }}/osism/aptly:{{ aptly_tag }}"
+
+##########################
+# devpi
+
+devpi_host: "{{ ansible_default_ipv4.address }}"
+devpi_port: 3141
+
+devpi_docker_compose_directory: /opt/devpi
+devpi_configuration_directory: /opt/devpi/configuration
+
+devpi_tag: 4.6.0
+devpi_image: "{{ docker_registry }}/osism/devpi:{{ devpi_tag }}"
 
 ##########################
 # registry
