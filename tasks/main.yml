@@ -17,3 +17,8 @@
   include: nginx.yml
   tags: nginx
   when: configure_nginx|bool
+
+- name: devpi - include tasks
+  include: devpi.yml
+  tags: devpi
+  when: configure_devpi|bool

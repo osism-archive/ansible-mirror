@@ -3,6 +3,7 @@
 # generic
 
 configure_aptly: no
+configure_devpi: no
 configure_nginx: no
 configure_registry: no
 
@@ -65,3 +66,17 @@ registry_configuration:
 
 registry_tag: 2.6.2
 registry_image: "{{ docker_registry }}/registry:{{ registry_tag }}"
+
+##########################
+# devpi
+
+devpi_host: "{{ ansible_default_ipv4.address }}"
+devpi_port: 3141
+
+devpi_docker_compose_directory: /opt/devpi
+
+devpi_configuration:
+  virtual_host: devpi
+
+devpi_tag: latest
+devpi_image: "{{ docker_registry }}/devpi:{{ devpi_tag }}"
