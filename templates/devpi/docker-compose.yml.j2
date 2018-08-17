@@ -1,0 +1,19 @@
+---
+ version: '2'
+ services:
+   devpi:
+     restart: unless-stopped
+     image: "{{ devpi_image }}"
+     volumes:
+       - "storage:/data"
+     ports:
+       - "{{ devpi_host }}:{{ devpi_port }}:3141"
+     networks:
+       mirror:
+         aliases:
+           - devpi
+ volumes:
+   storage:
+ networks:
+   mirror:
+     external: true

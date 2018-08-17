@@ -8,12 +8,17 @@
   tags: aptly
   when: configure_aptly|bool
 
-- name: registry - include tasks
-  include: registry.yml
-  tags: registry
-  when: configure_registry|bool
+- name: devpi - include tasks
+  include: devpi.yml
+  tags: devpi
+  when: configure_devpi|bool
 
 - name: nginx - include tasks
   include: nginx.yml
   tags: nginx
   when: configure_nginx|bool
+
+- name: registry - include tasks
+  include: registry.yml
+  tags: registry
+  when: configure_registry|bool
