@@ -9,6 +9,7 @@
   become: true
   with_items:
     - "{{ devpi_configuration_directory }}"
+    - "{{ devpi_docker_compose_directory }}"
 
 - name: devpi - copy docker-compose.yml file
   template:
