@@ -26,6 +26,7 @@
   become: true
   with_items:
     - "{{ aptly_configuration_directory }}"
+    - "{{ aptly_docker_compose_directory }}"
 
 - name: aptly - copy configuration files
   template:

@@ -9,6 +9,7 @@
   become: true
   with_items:
     - "{{ registry_configuration_directory }}"
+    - "{{ registry_docker_compose_directory }}"
 
 - name: registry - copy configuration files
   template:
