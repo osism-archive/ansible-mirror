@@ -4,8 +4,8 @@
    devpi:
      restart: unless-stopped
      image: "{{ devpi_image }}"
-    environment:
-      DEVPI_PASSWORD: "{{ devpi_configuration['secret'] }}"
+     environment:
+       DEVPI_PASSWORD: "{{ devpi_configuration['secret'] }}"
      volumes:
        - "storage:/data"
      ports:
