@@ -60,6 +60,9 @@ devpi_port: 3141
 devpi_docker_compose_directory: /opt/devpi
 devpi_configuration_directory: /opt/devpi/configuration
 
+devpi_configuration:
+  secret: password
+
 devpi_tag: 4.6.0
 devpi_image: "{{ docker_registry }}/osism/devpi:{{ devpi_tag }}"
 
