@@ -22,7 +22,7 @@ docker_registry: index.docker.io
 # nginx
 
 nginx_tag: 1.13
-nginx_image: "{{ docker_registry }}/nginx:{{ nginx_tag }}"
+nginx_image: "{{ docker_registry }}/library/nginx:{{ nginx_tag }}"
 
 nginx_docker_compose_directory: /opt/nginx
 nginx_configuration_directory: /opt/nginx/configuration
@@ -80,4 +80,4 @@ registry_configuration:
   virtual_host: registry
 
 registry_tag: 2.6.2
-registry_image: "{{ docker_registry }}/registry:{{ registry_tag }}"
+registry_image: "{{ docker_registry }}/library/registry:{{ registry_tag }}"
