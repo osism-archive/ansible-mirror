@@ -1,7 +1,13 @@
 ---
+# NOTE(berendt): use docker cli to create the network to avoid issue with docker/docker-py
+#
+# https://docs.ansible.com/ansible/latest/modules/docker_network_module.html#requirements
+
 - name: Create overlay network
-  docker_network:
-    name: mirror
+  command: "docker network create mirror"
+  register: result
+  changed_when: result.rc == 0
+  failed_when: result.rc != 0 and 'already exists' not in result.stderr
 
 - name: aptly - include tasks
   include: aptly.yml
