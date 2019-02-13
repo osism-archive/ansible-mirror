@@ -19,6 +19,11 @@
   tags: devpi
   when: configure_devpi|bool
 
+- name: nexus - include tasks
+  include: nexus.yml
+  tags: nexus
+  when: configure_nexus|bool
+
 - name: nginx - include tasks
   include: nginx.yml
   tags: nginx
