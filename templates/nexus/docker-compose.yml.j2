@@ -8,6 +8,7 @@ services:
       - "storage:/nexus-data"
     ports:
       - "{{ nexus_host }}:{{ nexus_port }}:8081"
+      - "{{ nexus_host }}:{{ nexus_registry_port }}:5000"
     networks:
       mirror:
         aliases:
