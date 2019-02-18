@@ -7,9 +7,7 @@
     docker_registry: registry-1.osism.io
     operator_user: ubuntu
     configure_aptly: yes
-    configure_devpi: yes
     configure_nexus: yes
-    configure_nginx: yes
     configure_registry: yes
 
   roles:
