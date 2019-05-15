@@ -28,7 +28,7 @@ nexus_port: 8081
 nexus_registry_port: 5000
 
 nexus_tag: 3.15.2
-nexus_image: "{{ docker_registry }}/osism/nexus:{{ nexus_tag }}"
+nexus_image: "{{ docker_registry }}/sonatype/nexus3:{{ nexus_tag }}"
 
 ##########################
 # aptly
