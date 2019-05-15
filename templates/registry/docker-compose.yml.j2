@@ -10,7 +10,9 @@ services:
       - "{{ registry_configuration_directory }}:/etc/docker/registry"
       - "storage:/var/lib/registry"
     ports:
-      - "{{ registry_host }}:{{ registry_port }}:5000"
+{% for port in registry_ports %}
+      - "{{ port }}"
+{% endfor %}
     networks:
       mirror:
         aliases:

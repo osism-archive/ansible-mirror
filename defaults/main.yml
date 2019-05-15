@@ -44,6 +44,8 @@ aptly_configuration:
 
 aptly_nginx_host: "{{ ansible_default_ipv4.address }}"
 aptly_nginx_port: 8080
+aptly_nginx_ports:
+  - "{{ aptly_nginx_host }}:{{ aptly_nginx_port }}:80"
 
 aptly_tag: 1.3.0
 aptly_image: "{{ docker_registry }}/osism/aptly:{{ aptly_tag }}"
@@ -56,6 +58,8 @@ nginx_image: "{{ docker_registry }}/library/nginx:{{ nginx_tag }}"
 
 registry_host: "{{ ansible_default_ipv4.address }}"
 registry_port: 5000
+registry_ports:
+  - "{{ registry_host }}:{{ registry_port }}:5000"
 
 registry_docker_compose_directory: /opt/registry
 registry_configuration_directory: /opt/registry/configuration
