@@ -4,10 +4,12 @@
   connection: paramiko
 
   vars:
-    operator_user: ubuntu
+    ansible_ssh_user: dragon
+
     configure_aptly: yes
     configure_nexus: yes
     configure_registry: yes
+
     nexus_registry_port: 5001
 
   roles:
