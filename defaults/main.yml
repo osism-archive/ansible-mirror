@@ -40,7 +40,7 @@ aptly_configuration:
   full_name: Betacloud Solutions GmbH
   email_address: info@osism.io
   gpg_password: password
-  virtual_host: aptly
+#  virtual_host: aptly
 
 aptly_nginx_host: "{{ ansible_default_ipv4.address }}"
 aptly_nginx_port: 8080
@@ -66,7 +66,7 @@ registry_configuration_directory: /opt/registry/configuration
 
 registry_configuration:
   secret: password
-  virtual_host: registry
+#  virtual_host: registry
 
 registry_tag: 2.7
 registry_image: "{{ docker_registry }}/library/registry:{{ registry_tag }}"
