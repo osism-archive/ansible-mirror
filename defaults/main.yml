@@ -50,7 +50,7 @@ aptly_nginx_ports:
 aptly_tag: 1.4.0
 aptly_image: "{{ docker_registry }}/osism/aptly:{{ aptly_tag }}"
 
-nginx_tag: 1.17
+nginx_tag: 1.17-alpine
 nginx_image: "{{ docker_registry }}/library/nginx:{{ nginx_tag }}"
 
 ##########################
