@@ -27,7 +27,7 @@ nexus_host: "{{ ansible_default_ipv4.address }}"
 nexus_port: 8081
 nexus_registry_port: 5000
 
-nexus_tag: 3.19.1
+nexus_tag: 3.22.0
 nexus_image: "{{ docker_registry }}/sonatype/nexus3:{{ nexus_tag }}"
 
 ##########################
