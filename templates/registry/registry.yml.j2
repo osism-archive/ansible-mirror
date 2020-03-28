@@ -10,7 +10,9 @@ storage:
     rootdirectory: /var/lib/registry
 http:
   addr: :{{ registry_port }}
+{% if 'secret' in registry_configuration %}
   secret: {{ registry_configuration['secret'] }}
+{% endif %}
   headers:
     X-Content-Type-Options: [nosniff]
 health:
