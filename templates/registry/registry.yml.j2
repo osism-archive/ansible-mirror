@@ -20,3 +20,7 @@ health:
     enabled: true
     interval: 10s
     threshold: 3
+{% if 'proxy' in registry_configuration %}
+proxy:
+  remoteurl: {{ registry_configuration['proxy'] }}
+{% endif %}
