@@ -27,7 +27,7 @@ nexus_host: "{{ ansible_default_ipv4.address }}"
 nexus_port: 8081
 nexus_registry_port: 5000
 
-nexus_tag: 3.22.0
+nexus_tag: 3.23.0
 nexus_image: "{{ docker_registry }}/sonatype/nexus3:{{ nexus_tag }}"
 
 ##########################
@@ -50,7 +50,7 @@ aptly_nginx_ports:
 aptly_tag: 1.4.0
 aptly_image: "{{ docker_registry }}/osism/aptly:{{ aptly_tag }}"
 
-nginx_tag: 1.17-alpine
+nginx_tag: 1.18-alpine
 nginx_image: "{{ docker_registry }}/library/nginx:{{ nginx_tag }}"
 
 ##########################
