@@ -1,4 +1,7 @@
 ---
 ansible_role_name: mirror
+distributions:
+  - bionic
+  - focal
 molecule_needs_docker: true
 travis_decrypt_key: 594e543811fb
